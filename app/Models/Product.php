@@ -2,10 +2,41 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Favori;
+use App\Models\Comment;
+use App\Models\Category;
+use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable =['user_id','category_id','name','description','price'];
+
+    public function user():BelongsTo 
+    {
+        return  $this->belongsTo(User::class);
+    }
+
+    public function category():BelongsTo 
+    {
+        return  $this->belongsTo(Category::class);
+    }
+    public function favoris():HasMany 
+    {
+        return  $this->hasMany(Favori::class);
+    }
+
+    public function comments():HasMany 
+    {
+        return  $this->hasMany(Comment::class);
+    }
+    public function images():HasMany 
+    {
+        return  $this->hasMany(ProductImage::class);
+    }
 }
