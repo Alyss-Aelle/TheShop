@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Favori;
 use App\Models\Comment;
 use App\Models\Category;
-use App\Models\ProductImage;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,7 +15,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable =['user_id','category_id','name','description','price'];
+    protected $fillable = ['user_id','category_id','name','description','defaultImage','carouselImage','price'];
+    protected $casts = ['carouselImage' => 'array',];
 
     public function user():BelongsTo 
     {
@@ -35,8 +36,5 @@ class Product extends Model
     {
         return  $this->hasMany(Comment::class);
     }
-    public function images():HasMany 
-    {
-        return  $this->hasMany(ProductImage::class);
-    }
+
 }
