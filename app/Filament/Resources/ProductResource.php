@@ -36,11 +36,21 @@ class ProductResource extends Resource
                     ->maxLength(100),
                 Forms\Components\Textarea::make('description')
                 ->maxLength(65535),
-                FileUpload::make('defaultImage'),
+                FileUpload::make('defaultImage')
+                ->image()
+                ->imageResizeMode('cover')
+                ->imageCropAspectRatio('16:9')
+                ->imageResizeTargetWidth('1920')
+                ->imageResizeTargetHeight('1080'),
                 FileUpload::make('carouselImage')
                 ->multiple()
-                ->minFiles(1)
-                ->maxFiles(4),
+                /*->minFiles(1)*/
+                ->maxFiles(4)
+                ->image()
+                ->imageResizeMode('cover')
+                ->imageCropAspectRatio('16:9')
+                ->imageResizeTargetWidth('1920')
+                ->imageResizeTargetHeight('1080'),
 
                     
                 Forms\Components\TextInput::make('price'),
